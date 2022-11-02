@@ -1,22 +1,18 @@
 <?php
-$receiving_email_address = 'mr.rajnishmani@gmail.com';
+     $name = $_POST['name'];
+     $email = $_POST['email'];
+     $message = $_POST['message'];
 
-if (file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php')) {
-  include($php_email_form);
-} else {
-  die('Unable to load the "PHP Email Form" Library!');
-}
-
-$contact = new $php_email_form;
-$contact->ajax = true;
-
-$contact->to = $receiving_email_address;
-$contact->from_name = $_POST['name'];
-$contact->from_email = $_POST['email'];
-$contact->subject = $_POST['subject'];
-$contact->add_message($_POST['name'], 'From');
-$contact->add_message($_POST['email'], 'Email');
-$contact->add_message($_POST['message'], 'Message', 10);
-
-echo $contact->send();
+    $email_from = 'Rajnish Mani Tiwari';
+    $email_subject = 'New Message From Rajnish Contact'
+    $email_body =  "Name: $name.\n".
+                   "Email: $email.\n".
+                   "Message: $message.\n";
+                   
+     $to ="mr.rajnishmani@gmail.com";
+     $headers = "From: $email_from \r\n";
+     $headers .= "Reply-To: $email \r\n";
+    
+     mail($to,$email_subject,$email_body,$headers);
+    header ("location: index.html");
 ?>
